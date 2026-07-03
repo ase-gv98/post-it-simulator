@@ -1,0 +1,88 @@
+:root{
+  --color-normal: #FFFFCC;
+  --color-importante: #EC7063;
+  --color-background: #666666;
+  --color-gris-oscuro: #111111;
+}
+
+body{
+  background: var(--color-background);
+  color: var(--color-gris-oscuro);
+  padding: 20px;
+}
+
+h1{
+  color: #fff;
+}
+
+.app-title{
+  color: #111111;
+  font-weight: 700;
+}
+
+
+.postit-card{
+  background: var(--color-normal);
+  border-radius: 0px;
+  padding: 12px 12px;
+  box-shadow: 4px 6px 8px rgba(0,0,0,0.35);
+  position: relative;
+  word-wrap: break-word;
+  transform-origin: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.postit-card.importante{
+  background: var(--color-importante);
+  color: #fff;
+}
+
+.postit-title{
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.postit-desc{
+  font-family: 'Reenie Beanie', cursive;
+  font-size: 28px;
+}
+
+.postit-delete{
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  font-weight: bold;
+  color: rgba(0,0,0,0.85);
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.postit-delete:hover{
+  color: rgba(0,0,0,0.9);
+  cursor: pointer;
+}
+
+.notes-row{
+  row-gap: 18px;
+}
+
+/* gentle random-like rotations to mimic sticky notes layout */
+.notes-row > .col-12:nth-child(4n+1) .postit-card{ transform: rotate(-4deg); }
+.notes-row > .col-12:nth-child(4n+2) .postit-card{ transform: rotate(3deg); }
+.notes-row > .col-12:nth-child(4n+3) .postit-card{ transform: rotate(-2deg); }
+.notes-row > .col-12:nth-child(4n+4) .postit-card{ transform: rotate(2deg); }
+
+.form-error{
+  color: #ffdddd;
+}
