@@ -1,20 +1,32 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { PostIt } from './PostIt';
 import { PostItForm } from './PostItForm';
 
 export function PostItList(){
   const [notas, setNotas] = useState([]);
+  const iniciado = useRef(false);
 
-  useEffect(()=>{
-    const raw = localStorage.getItem('postits');
-    if(raw){
-      try{
-        setNotas(JSON.parse(raw));
-      }catch(e){}
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem('postits');
+      if (!raw || raw === 'undefined') {
+        iniciado.current = true;
+        return;
+      }
+      const storedNotas = JSON.parse(raw);
+      if (Array.isArray(storedNotas)) {
+        setNotas(storedNotas);
+      }
+    } catch (error) {
+      console.warn('No se pudieron cargar las notas:', error);
+      localStorage.removeItem('postits');
+    } finally {
+      iniciado.current = true;
     }
-  },[]);
+  }, []);
 
   useEffect(()=>{
+    if (!iniciado.current) return;
     localStorage.setItem('postits', JSON.stringify(notas));
   },[notas]);
 
